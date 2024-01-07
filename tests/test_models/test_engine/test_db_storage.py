@@ -86,3 +86,27 @@ class TestFileStorage(unittest.TestCase):
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_save(self):
         """Test that save properly saves objects to file.json"""
+
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db', "not testing db storage")
+    def test_save(self):
+        """Test get method properly retrives objects"""
+        new_state = State(name="Atlanta")
+        new_state.save()
+        new_user = User(email="usr@gmail.com", password="password")
+        new_user.save()
+        self.assertIs(models.storage.get("State", new_state.id), new_state)
+        self.assertIs(models.storage.get("State", "sta"), None)
+        self.assertIs(models.storage.get("usr", "usr"), None)
+        self.assertIs(models.storage.get("User", new_user.id), new_user)
+
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db', "not testing db storage")
+    def test_count(self):
+        """Test get method properly retrives objects"""
+        initial_count = models.storage.count()
+        self.assertEqual(models.storage.count("usr"), 0)
+        new_state = State(name="California")
+        new_state.save()
+        new_user = User(email="usr1@gmail.com", password="password")
+        new_user.save()
+        self.assertEqual(models.storage.count("State"), initial_count + 1)
+        self.assertEqual(models.storage.count(), initial_count + 2)
