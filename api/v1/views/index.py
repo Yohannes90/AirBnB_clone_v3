@@ -1,13 +1,14 @@
 #!/usr/bin/python3
 """Initialize Blueprint views"""
 from api.v1.views import app_views
-from flask import Flask, Blueprint, jsonify
+from flask import jsonify
 
 
-@app_views.route('/status', strict_slashes=False)
+@app_views.route('/status', methods=['GET'], strict_slashes=False)
 def hbnbStatus():
     """hbnb status"""
-    return jsonify({"status": "OK"})
+    response = {"status": "OK"}
+    return jsonify(response)
 
 
 if __name__ == "__main__":

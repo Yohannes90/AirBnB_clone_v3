@@ -1,8 +1,7 @@
-#!/usr/bin/bash
+#!/usr/bin/python3
 """connect to api"""
 from api.v1.views import app_views
-from flask import Flask, Blueprint
-from flask_cors import CORS
+from flask import Flask, jsonify
 from models import storage
 import os
 
