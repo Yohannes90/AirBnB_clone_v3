@@ -89,7 +89,7 @@ class TestFileStorage(unittest.TestCase):
 
     @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db',
                      "not testing db storage")
-    def test_save(self):
+    def test_get(self):
         """Test get method properly retrives objects"""
         new_state = State(name="Atlanta")
         new_state.save()
