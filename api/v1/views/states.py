@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Initialize Blueprint views"""
+"""Initialize Blueprint states"""
 from api.v1.views import app_views
 from flask import abort, request, jsonify
 from models import storage
