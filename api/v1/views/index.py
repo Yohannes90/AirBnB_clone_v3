@@ -11,7 +11,7 @@ def hbnbStatus():
     response = {"status": "OK"}
     return jsonify(response)
 
-@app_views.route('/stats', methods=['GET'])
+@app_views.route('/stats', methods=['GET'], strict_slashes=False)
 def hbnbStats():
     """hbnb stats retrieves the number of each objects by type"""
     stats = {
