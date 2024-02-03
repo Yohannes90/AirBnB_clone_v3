@@ -58,7 +58,7 @@ def createReview(place_id):
                     return jsonify(review.to_dict()), 201
                 abort(400, 'Missing text')
             abort(400, 'Missing user_id')
-        abort(404, 'Not a JSON')
+        abort(400, 'Not a JSON')
     abort(404)
 
 
@@ -76,5 +76,5 @@ def updateReview(review_id):
                     setattr(review, key, value)
             review.save()
             return jsonify(review.to_dict()), 200
-        abort(404, 'Not a JSON')
+        abort(400, 'Not a JSON')
     abort(404)

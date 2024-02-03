@@ -49,7 +49,7 @@ def createUser():
                 return jsonify(user.to_dict()), 201
             abort(400, 'Missing password')
         abort(400, 'Missing email')
-    abort(404, 'Not a JSON')
+    abort(400, 'Not a JSON')
 
 
 @app_views.route('/users/<user_id>', methods=['PUT'],
@@ -66,5 +66,5 @@ def updateUser(user_id):
                     setattr(user, key, value)
             user.save()
             return jsonify(user.to_dict()), 200
-        abort(404, 'Not a JSON')
+        abort(400, 'Not a JSON')
     abort(404)

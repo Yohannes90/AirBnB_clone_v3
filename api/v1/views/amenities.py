@@ -47,7 +47,7 @@ def createAmenity():
             amenity.save()
             return jsonify(amenity.to_dict()), 201
         abort(400, 'Missing name')
-    abort(404, 'Not a JSON')
+    abort(400, 'Not a JSON')
 
 
 @app_views.route('/amenities/<amenity_id>', methods=['PUT'],
@@ -64,5 +64,5 @@ def updateAmenity(amenity_id):
                     setattr(amenity, key, value)
             amenity.save()
             return jsonify(amenity.to_dict()), 200
-        abort(404, 'Not a JSON')
+        abort(400, 'Not a JSON')
     abort(404)

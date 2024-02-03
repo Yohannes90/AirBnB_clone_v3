@@ -58,7 +58,7 @@ def createPlace(city_id):
                     return jsonify(place.to_dict()), 201
                 abort(400, 'Missing name')
             abort(400, 'Missing user_id')
-        abort(404, 'Not a JSON')
+        abort(400, 'Not a JSON')
     abort(404)
 
 
@@ -76,5 +76,5 @@ def updatePlace(place_id):
                     setattr(place, key, value)
             place.save()
             return jsonify(place.to_dict()), 200
-        abort(404, 'Not a JSON')
+        abort(400, 'Not a JSON')
     abort(404)
