@@ -1,12 +1,13 @@
 #!/usr/bin/python3
 """Initialize Blueprint states"""
+
 from api.v1.views import app_views
 from flask import abort, request, jsonify
 from models import storage
 from models.state import State
 
 
-@app_views.route('/states', methods=['GET'], strict_slashes=False)
+@app_views.route('/states/', methods=['GET'])
 def getAllStates():
     """retrives list of all state objects"""
     states = storage.all(State).values()
@@ -14,7 +15,7 @@ def getAllStates():
     return jsonify(state_list)
 
 
-@app_views.route('/states/<state_id>', methods=['GET'], strict_slashes=False)
+@app_views.route('/states/<state_id>', methods=['GET'])
 def getState(state_id):
     """retrives specific state object with its id"""
     state = storage.get(State, state_id)
@@ -24,7 +25,7 @@ def getState(state_id):
 
 
 @app_views.route('/states/<state_id>', methods=['DELETE'],
-                 strict_slashes=False)
+            )
 def deleteState(state_id):
     """deletes a State object"""
     state = storage.get(State, state_id)
@@ -35,7 +36,7 @@ def deleteState(state_id):
     abort(404)
 
 
-@app_views.route('/states', methods=['POST'], strict_slashes=False)
+@app_views.route('/states/', methods=['POST'])
 def createState():
     """creates a State object"""
     kwargs = request.get_json()
@@ -48,7 +49,7 @@ def createState():
     abort(404, 'Not a JSON')
 
 
-@app_views.route('/states/<state_id>', methods=['PUT'], strict_slashes=False)
+@app_views.route('/states/<state_id>', methods=['PUT'])
 def updateState(state_id):
     """update a State object"""
     state = storage.get(State, state_id)
