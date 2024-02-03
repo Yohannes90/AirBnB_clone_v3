@@ -43,7 +43,7 @@ def createUser():
     kwargs = request.get_json()
     if kwargs:
         if 'email' in kwargs:
-            if 'password' not in kwargs:
+            if 'password' in kwargs:
                 user = User(**kwargs)
                 user.save()
                 return jsonify(user.to_dict()), 201
