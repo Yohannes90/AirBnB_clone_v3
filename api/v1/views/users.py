@@ -42,11 +42,13 @@ def createUser():
     """creates a User object"""
     kwargs = request.get_json()
     if kwargs:
-        if 'name' in kwargs:
-            user = User(**kwargs)
-            user.save()
-            return jsonify(user.to_dict()), 201
-        abort(400, 'Missing name')
+        if 'email' in kwargs:
+            if 'password' not in kwargs:
+                user = User(**kwargs)
+                user.save()
+                return jsonify(user.to_dict()), 201
+            abort(400, 'Missing password')
+        abort(400, 'Missing email')
     abort(404, 'Not a JSON')
 
 
