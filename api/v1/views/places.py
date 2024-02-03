@@ -47,18 +47,18 @@ def createPlace(city_id):
     """creates a Place object"""
     city = storage.get(City, city_id)
     kwargs = request.get_json()
+    if not kwargs:
+        abort(400, 'Not a JSON')
+    if 'user_id' not in kwargs:
+        abort(400, 'Missing user_id')
     user = storage.get(User, kwargs['user_id'])
     if city and user:
-        if kwargs:
-            if 'user_id' in kwargs:
-                if 'name' in kwargs:
-                    kwargs['city_id'] = city_id
-                    place = Place(**kwargs)
-                    place.save()
-                    return jsonify(place.to_dict()), 201
-                abort(400, 'Missing name')
-            abort(400, 'Missing user_id')
-        abort(400, 'Not a JSON')
+        if 'name' in kwargs:
+            kwargs['city_id'] = city_id
+            place = Place(**kwargs)
+            place.save()
+            return jsonify(place.to_dict()), 201
+        abort(400, 'Missing name')
     abort(404)
 
 
