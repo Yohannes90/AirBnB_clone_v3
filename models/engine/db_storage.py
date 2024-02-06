@@ -77,7 +77,7 @@ class DBStorage:
 
     def get(self, cls, id):
         """Retrive object based on the class and its ID else return None"""
-        if cls in classes:
+        if cls in classes.keys():
             cls = classes[cls]
             return self.__session.query(cls).filter(cls.id == id).first()
         elif cls in classes.values():
@@ -86,7 +86,7 @@ class DBStorage:
 
     def count(self, cls=None):
         """count number of objects for given class, else count total objects"""
-        if cls in classes:
+        if cls in classes.keys():
             cls = classes[cls]
             return self.__session.query(cls).count()
         elif cls in classes.values():

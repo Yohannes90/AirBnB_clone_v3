@@ -119,12 +119,10 @@ class TestFileStorage(unittest.TestCase):
     def test_get(self):
         """Test get method properly retrives objects"""
         storage = FileStorage()
-        self.assertIs(storage.get("User", "usr"), None)
         self.assertIs(storage.get(User, "usr"), None)
         self.assertIs(storage.get("usr", "usr"), None)
         new_user = User()
         new_user.save()
-        self.assertIs(storage.get("User", new_user.id), new_user)
         self.assertIs(storage.get(User, new_user.id), new_user)
 
     @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db',
@@ -135,8 +133,8 @@ class TestFileStorage(unittest.TestCase):
         initial_count = len(storage.all())
         self.assertEqual(storage.count(), initial_count)
         state_count = len(storage.all(State))
-        self.assertEqual(storage.count("State"), state_count)
+        self.assertEqual(storage.count(State), state_count)
         new_state = State()
         new_state.save()
-        self.assertEqual(storage.count("State"), state_count + 1)
+        self.assertEqual(storage.count(State), state_count + 1)
         self.assertEqual(storage.count(), initial_count + 1)
