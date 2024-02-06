@@ -120,6 +120,7 @@ class TestFileStorage(unittest.TestCase):
         """Test get method properly retrives objects"""
         storage = FileStorage()
         self.assertIs(storage.get("User", "usr"), None)
+        self.assertIs(storage.get(User, "usr"), None)
         self.assertIs(storage.get("usr", "usr"), None)
         new_user = User()
         new_user.save()
@@ -132,7 +133,7 @@ class TestFileStorage(unittest.TestCase):
         storage = FileStorage()
         initial_count = len(storage.all())
         self.assertEqual(storage.count(), initial_count)
-        state_count = len(storage.all("State"))
+        state_count = len(storage.all(State))
         self.assertEqual(storage.count("State"), state_count)
         new_state = State()
         new_state.save()
