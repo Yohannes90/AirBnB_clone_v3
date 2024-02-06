@@ -99,6 +99,7 @@ class TestFileStorage(unittest.TestCase):
         self.assertIs(models.storage.get(State, "sta"), None)
         self.assertIs(models.storage.get("usr", "usr"), None)
         self.assertIs(models.storage.get(User, new_user.id), new_user)
+        self.assertIs(models.storage.get("User", new_user.id), new_user)
 
     @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') != 'db',
                      "not testing db storage")

@@ -72,12 +72,19 @@ class FileStorage:
 
     def get(self, cls, id):
         """Retrive object based on the class and its ID else return None"""
-        if type(cls) is str and type(id) is str and cls in classes:
+        if cls in classes.keys():
             return self.__objects.get(f"{cls}.{id}", None)
+        elif cls in classes.values():
+            all_cls = models.storage.all(cls)
+            for value in all_cls.values():
+                if (value.id == id):
+                    return value
         return None
 
     def count(self, cls=None):
         """count number of objects for given class, else count total objects"""
-        if cls in classes:
+        if cls in classes.keys():
             return len(self.all(cls))
+        elif cls in classes.values():
+            return len(models.storage.all(cls))
         return len(self.__objects)
