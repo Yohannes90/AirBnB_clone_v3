@@ -105,10 +105,11 @@ class TestFileStorage(unittest.TestCase):
     def test_count(self):
         """Test get method properly retrives objects"""
         initial_count = models.storage.count()
+        initial_state = models.storage.count(State)
         self.assertEqual(models.storage.count("usr"), 0)
         new_state = State(name="California")
         new_state.save()
         new_user = User(email="usr1@gmail.com", password="password")
         new_user.save()
-        self.assertEqual(models.storage.count(State), initial_count + 1)
+        self.assertEqual(models.storage.count(State), initial_state + 1)
         self.assertEqual(models.storage.count(), initial_count + 2)
